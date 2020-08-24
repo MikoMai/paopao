@@ -31,6 +31,12 @@ public class BaseData implements Serializable {
     @JsonFormat(shape= JsonFormat.Shape.STRING,pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date updateDate;
 
+    /**
+     * 状态1 启用 2禁用 3删除
+     */
+    @Column
+    private int status=1;
+
 
     public Date getCreateDate() {
         return createDate;
@@ -54,5 +60,13 @@ public class BaseData implements Serializable {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

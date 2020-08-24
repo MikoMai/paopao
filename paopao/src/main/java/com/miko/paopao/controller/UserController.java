@@ -37,6 +37,12 @@ public class UserController {
         return RetResponse.makeOKRsp(user);
     }
 
+    @RequestMapping("/updateUser")
+    public RetResult<Object> updateUser(@RequestBody User user){
+        userService.saveUser(user);
+        return RetResponse.makeOKRsp();
+    }
+
     @RequestMapping(value = "/getUserPage")
     public RetResult<Page<User>> getUserPage(@RequestParam(value = "pageSize") Integer pageSize,@RequestParam(value = "page") Integer page){
         Pageable pageable =  PageRequest.of(page-1,pageSize);

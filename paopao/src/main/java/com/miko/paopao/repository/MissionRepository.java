@@ -1,17 +1,13 @@
 package com.miko.paopao.repository;
 
-import com.miko.paopao.entity.User;
+import com.miko.paopao.entity.Mission;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-/**
- * @author miko
- */
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
-
+public interface MissionRepository extends JpaRepository<Mission, Long> {
 
 
     /**
@@ -20,7 +16,16 @@ public interface UserRepository extends JpaRepository<User, Long> {
      * @param id
      */
     @Modifying
-    @Query("update User u set u.status=?1 where  u.id=?2")
+    @Query("update Mission m set m.status=?1 where  m.id=?2")
     void updateStatusById(int status, Long id);
 
+
+    /**
+     * 更新数据运行状态
+     * @param missionStatus
+     * @param id
+     */
+    @Modifying
+    @Query("update Mission m set m.missionStatus=?1 where  m.id=?2")
+    void updateMissionStatusById(int missionStatus, Long id);
 }
