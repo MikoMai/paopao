@@ -1,11 +1,12 @@
 package com.miko.paopao.service.impl;
 
+import com.miko.paopao.base.response.RetResponse;
+import com.miko.paopao.base.response.RetResult;
 import com.miko.paopao.entity.Gift;
 import com.miko.paopao.entity.Notice;
 import com.miko.paopao.entity.User;
 import com.miko.paopao.entity.dataenum.NoticeType;
 import com.miko.paopao.repository.GiftRepository;
-import com.miko.paopao.repository.UserRepository;
 import com.miko.paopao.service.GiftService;
 import com.miko.paopao.service.NoticeService;
 import com.miko.paopao.service.UserService;
@@ -50,14 +51,14 @@ public class GiftServiceImpl implements GiftService {
     }
 
     @Override
-    public void takeGift(Long userId, Long giftId) {
+    public RetResult<Object> takeGift(Long userId, Long giftId) {
         User user=userService.getUserById(userId);
         Gift gift=this.getOneById(giftId);
         if (user.getIntegral()<gift.getIntegral()){
-            throw new RuntimeException("你的积分不足");
+            return RetResponse.makeErrRsp("你的积分不足");
         }
         if (gift.getNum()==0){
-            throw new RuntimeException("该礼物库存不足,请选择其它礼物");
+            return RetResponse.makeErrRsp("该礼物库存不足,请选择其它礼物");
         }
         Notice notice=new Notice();
         notice.setType(NoticeType.GIFT);
@@ -66,6 +67,8 @@ public class GiftServiceImpl implements GiftService {
         noticeService.saveNotice(notice);
         gift.setNum(gift.getNum()-1);
         this.save(gift);
-
+        user.setIntegral(user.getIntegral()-gift.getIntegral());
+        userService.saveUser(user);
+        return RetResponse.makeOKRsp();
     }
 }

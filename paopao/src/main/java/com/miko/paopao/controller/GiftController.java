@@ -51,8 +51,7 @@ public class GiftController {
 
     @RequestMapping("/takeGift")
     public RetResult<Object> takeGift(@RequestParam(value = "userId") Long userId,@RequestParam(value = "giftId") Long giftId){
-        giftService.takeGift(userId,giftId);
-        return RetResponse.makeOKRsp();
+        return giftService.takeGift(userId,giftId);
     }
 
 }

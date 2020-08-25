@@ -1,7 +1,7 @@
 package com.miko.paopao.service;
 
+import com.miko.paopao.base.response.RetResult;
 import com.miko.paopao.entity.Gift;
-import com.miko.paopao.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -42,6 +42,7 @@ public interface GiftService {
      *兑换礼物
      * @param userId
      * @param gift
+     * @return
      */
-    void takeGift(Long userId,Long gift);
+    RetResult<Object> takeGift(Long userId, Long gift);
 }
