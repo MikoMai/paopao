@@ -50,6 +50,12 @@ public class MissionServiceImpl implements MissionService {
     @Override
     public void updateMissionStatusById(int missionStatus, Long id) {
         missionRepository.updateMissionStatusById(missionStatus,id);
+        if(missionStatus==3){
+            Mission mission=this.getById(id);
+            User user=mission.getFinishByUser();
+            user.setIntegral(user.getIntegral()+mission.getIntegral());
+            userService.saveUser(user);
+        }
     }
 
     @Override

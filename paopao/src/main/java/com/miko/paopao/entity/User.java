@@ -14,6 +14,7 @@ import javax.persistence.*;
 public class User extends BaseData {
 
 
+    private static final long serialVersionUID = -5695117947813602732L;
     @Column
     private String name;
 

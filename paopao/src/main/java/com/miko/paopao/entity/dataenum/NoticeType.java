@@ -5,7 +5,7 @@ package com.miko.paopao.entity.dataenum;
  */
 
 public enum NoticeType {
-    MISSION("MISSION");
+    MISSION("MISSION"),GIFT("GIFT");
     private String type;
     private NoticeType(String type) {
         this.type = type;

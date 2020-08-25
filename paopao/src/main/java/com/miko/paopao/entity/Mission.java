@@ -12,6 +12,7 @@ import javax.persistence.*;
 @JsonIgnoreProperties(value={"hibernateLazyInitializer"})
 public class Mission extends BaseData {
 
+    private static final long serialVersionUID = -5093132276084672196L;
     /**
      * 标题
      */

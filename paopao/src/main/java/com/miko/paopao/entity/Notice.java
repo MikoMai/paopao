@@ -13,6 +13,7 @@ import javax.persistence.*;
 @JsonIgnoreProperties(value={"hibernateLazyInitializer"})
 public class Notice extends BaseData {
 
+    private static final long serialVersionUID = -6015234400001107550L;
     /**
      * 通知类型
      */
