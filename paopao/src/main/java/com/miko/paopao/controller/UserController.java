@@ -24,6 +24,14 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+
+    @RequestMapping("/saveAdmin")
+    public RetResult<Object> saveAdmin(@RequestBody User user){
+        user.setAdmin(true);
+        userService.saveUser(user);
+        return RetResponse.makeOKRsp();
+    }
+
     @RequestMapping("/saveUser")
     public RetResult<Object> saveUser(@RequestBody User user){
         userService.saveUser(user);
@@ -44,9 +52,17 @@ public class UserController {
     }
 
     @RequestMapping(value = "/getUserPage")
-    public RetResult<Page<User>> getUserPage(@RequestParam(value = "pageSize") Integer pageSize,@RequestParam(value = "page") Integer page){
+    public RetResult<Page<User>> getUserPage(@RequestParam(value = "pageSize") Integer pageSize,@RequestParam(value = "page") Integer page,@RequestParam(value = "name") String name){
         Pageable pageable =  PageRequest.of(page-1,pageSize);
-        Page<User> userPage=userService.getUserPage(pageable);
+        Page<User> userPage=userService.getUserPage(name,false,pageable);
+        return RetResponse.makeOKRsp(userPage);
+    }
+
+
+    @RequestMapping(value = "/getAdminPage")
+    public RetResult<Page<User>> getAdminPage(@RequestParam(value = "pageSize") Integer pageSize,@RequestParam(value = "page") Integer page,@RequestParam(value = "name") String name){
+        Pageable pageable =  PageRequest.of(page-1,pageSize);
+        Page<User> userPage=userService.getUserPage(name,true,pageable);
         return RetResponse.makeOKRsp(userPage);
     }
 }

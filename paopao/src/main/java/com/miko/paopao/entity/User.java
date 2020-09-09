@@ -30,6 +30,12 @@ public class User extends BaseData {
     @Column
     private String phone;
 
+    @Column
+    private String password;
+
+    @Column
+    private boolean admin;
+
     public String getName() {
         return name;
     }
@@ -70,12 +76,31 @@ public class User extends BaseData {
         this.phone = phone;
     }
 
-    public User(String name, int sex, int integral, String birthday, String phone) {
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
+    }
+
+
+    public User(String name, int sex, int integral, String birthday, String phone, String password, boolean admin) {
         this.name = name;
         this.sex = sex;
         this.integral = integral;
         this.birthday = birthday;
         this.phone = phone;
+        this.password = password;
+        this.admin = admin;
     }
 
     public User() {

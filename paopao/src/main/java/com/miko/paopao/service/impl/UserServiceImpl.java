@@ -24,8 +24,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Page<User> getUserPage(Pageable pageable) {
-        return userRepository.findAll(pageable);
+    public Page<User> getUserPage(String name,boolean isAdmin,Pageable pageable) {
+        return userRepository.findPageByName(name,isAdmin,pageable);
     }
 
     @Override

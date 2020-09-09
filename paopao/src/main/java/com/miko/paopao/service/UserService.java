@@ -27,7 +27,7 @@ public interface UserService {
      * @param pageable
      * @return
      */
-    Page<User> getUserPage(Pageable pageable);
+    Page<User> getUserPage(String name,boolean isAdmin,Pageable pageable) ;
 
     /**
      * 更新数据状态
