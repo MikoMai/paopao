@@ -65,4 +65,11 @@ public class UserController {
         Page<User> userPage=userService.getUserPage(name,true,pageable);
         return RetResponse.makeOKRsp(userPage);
     }
+
+
+    @RequestMapping("/delUser")
+    public RetResult<Object> delUser(@RequestParam(value = "id") Long id){
+        userService.updateStatusById(3,id);
+        return RetResponse.makeOKRsp();
+    }
 }
