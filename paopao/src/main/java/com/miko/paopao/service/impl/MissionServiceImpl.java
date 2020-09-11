@@ -72,4 +72,9 @@ public class MissionServiceImpl implements MissionService {
         noticeService.saveNotice(notice);
 
     }
+
+    @Override
+    public Page<Mission> getMissionPage(String title, Pageable pageable) {
+        return missionRepository.findPageByTitle(title,pageable);
+    }
 }

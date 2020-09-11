@@ -1,5 +1,6 @@
 package com.miko.paopao.service;
 
+import com.miko.paopao.base.response.RetResult;
 import com.miko.paopao.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -35,4 +36,13 @@ public interface UserService {
      * @param id
      */
     void updateStatusById(int status, Long id);
+
+
+    /**
+     * 登录
+     * @param name
+     * @param password
+     * @return
+     */
+    RetResult<Object> login(String name, String password);
 }

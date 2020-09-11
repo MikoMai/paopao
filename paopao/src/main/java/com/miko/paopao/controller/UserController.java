@@ -25,6 +25,12 @@ public class UserController {
     private UserService userService;
 
 
+    @RequestMapping("/login")
+    public RetResult<Object> login(@RequestParam(value = "name") String name,@RequestParam(value = "password") String password){
+
+        return userService.login(name, password);
+    }
+
     @RequestMapping("/saveAdmin")
     public RetResult<Object> saveAdmin(@RequestBody User user){
         user.setAdmin(true);

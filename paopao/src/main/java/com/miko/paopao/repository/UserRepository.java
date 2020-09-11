@@ -47,4 +47,12 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query(value = "SELECT u  FROM User u WHERE u.name like %:name% AND u.admin=:admin AND u.status<>3")
     Page<User> findPageByName(@Param("name") String name,@Param("admin") boolean admin,Pageable pageable);
 
+    /**
+     * 查询用户
+     * @param name
+     * @param password
+     * @return
+     */
+    User findByNameAndPassword(String name,String password);
+
 }

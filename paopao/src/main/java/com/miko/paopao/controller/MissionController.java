@@ -4,6 +4,9 @@ import com.miko.paopao.base.response.RetResponse;
 import com.miko.paopao.base.response.RetResult;
 import com.miko.paopao.entity.Mission;
 import com.miko.paopao.service.MissionService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -53,5 +56,12 @@ public class MissionController {
     public RetResult<Object> takeMission(@RequestParam(value = "missionId") Long missionId,@RequestParam(value = "userId") Long userId){
         missionService.takeMission(userId,missionId);
         return RetResponse.makeOKRsp();
+    }
+
+    @RequestMapping(value = "/getMissionPage")
+    public RetResult<Page<Mission>> getMissionPage(@RequestParam(value = "pageSize") Integer pageSize, @RequestParam(value = "page") Integer page, @RequestParam(value = "title") String title){
+        Pageable pageable =  PageRequest.of(page-1,pageSize);
+        Page<Mission> missionPage=missionService.getMissionPage(title,pageable);
+        return RetResponse.makeOKRsp(missionPage);
     }
 }

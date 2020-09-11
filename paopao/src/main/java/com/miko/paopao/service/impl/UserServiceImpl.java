@@ -1,5 +1,7 @@
 package com.miko.paopao.service.impl;
 
+import com.miko.paopao.base.response.RetResponse;
+import com.miko.paopao.base.response.RetResult;
 import com.miko.paopao.entity.User;
 import com.miko.paopao.repository.UserRepository;
 import com.miko.paopao.service.UserService;
@@ -34,5 +36,15 @@ public class UserServiceImpl implements UserService {
     public void updateStatusById(int status, Long id) {
         userRepository.updateStatusById(status,id);
     }
+
+    @Override
+    public RetResult<Object> login(String name, String password) {
+        User user=userRepository.findByNameAndPassword(name,password);
+        if(user==null){
+            return  RetResponse.makeErrRsp("用户名或密码错误!");
+        }
+        return RetResponse.makeOKRsp(user);
+    }
+
 
 }

@@ -52,4 +52,13 @@ public interface MissionService {
      */
     void takeMission(Long userId,Long missionId);
 
+
+    /**
+     * 分页
+     * @param title
+     * @param pageable
+     * @return
+     */
+    Page<Mission> getMissionPage(String title,Pageable pageable);
+
 }
