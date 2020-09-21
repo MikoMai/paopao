@@ -14,11 +14,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author admin
  */
 @Service
+@Transactional
 public class GiftServiceImpl implements GiftService {
 
     @Autowired
@@ -41,8 +43,8 @@ public class GiftServiceImpl implements GiftService {
     }
 
     @Override
-    public Page<Gift> getGiftPage(Pageable pageable) {
-        return giftRepository.findAll(pageable);
+    public Page<Gift> getGiftPage(String name,Pageable pageable) {
+        return giftRepository.findPageByName(name,pageable);
     }
 
     @Override

@@ -23,7 +23,7 @@ public class GiftController {
     private GiftService giftService;
 
     @RequestMapping("/saveGift")
-    public RetResult<Object> saveUser(@RequestBody Gift gift){
+    public RetResult<Object> saveGift(@RequestBody Gift gift){
         giftService.save(gift);
         return RetResponse.makeOKRsp();
     }
@@ -42,9 +42,9 @@ public class GiftController {
     }
 
     @RequestMapping(value = "/getGiftPage")
-    public RetResult<Page<Gift>> getGiftPage(@RequestParam(value = "pageSize") Integer pageSize,@RequestParam(value = "page") Integer page){
+    public RetResult<Page<Gift>> getGiftPage(@RequestParam(value = "name") String name,@RequestParam(value = "pageSize") Integer pageSize,@RequestParam(value = "page") Integer page){
         Pageable pageable =  PageRequest.of(page-1,pageSize);
-        Page<Gift> giftPage=giftService.getGiftPage(pageable);
+        Page<Gift> giftPage=giftService.getGiftPage(name,pageable);
         return RetResponse.makeOKRsp(giftPage);
     }
 
@@ -52,6 +52,12 @@ public class GiftController {
     @RequestMapping("/takeGift")
     public RetResult<Object> takeGift(@RequestParam(value = "userId") Long userId,@RequestParam(value = "giftId") Long giftId){
         return giftService.takeGift(userId,giftId);
+    }
+
+    @RequestMapping("/updateStatus")
+    public RetResult<Object> updateStatus(@RequestParam(value = "giftId") Long giftId,@RequestParam(value = "status") int status){
+        giftService.updateStatusById(status,giftId);
+        return RetResponse.makeOKRsp();
     }
 
 }

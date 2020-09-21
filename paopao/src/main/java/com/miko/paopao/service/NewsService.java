@@ -1,34 +1,35 @@
 package com.miko.paopao.service;
 
 import com.miko.paopao.base.response.RetResult;
-import com.miko.paopao.entity.Gift;
+import com.miko.paopao.entity.News;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 /**
  * @author miko
  */
-public interface GiftService {
+public interface NewsService {
 
     /**
      *保存用户
-     * @param gift
+     * @param news
      */
-    public void save(Gift gift);
+    public void save(News news);
 
     /**
      * 获取用户
      * @param id
      * @return
      */
-    public Gift getOneById(Long id);
+    public News getOneById(Long id);
 
     /**
      * 获取用户分页
+     * @param title
      * @param pageable
      * @return
      */
-    Page<Gift> getGiftPage(String name,Pageable pageable);
+    Page<News> getNewsPageByTitle(String title, Pageable pageable);
 
     /**
      * 更新数据状态
@@ -38,11 +39,4 @@ public interface GiftService {
     void updateStatusById(int status, Long id);
 
 
-    /**
-     *兑换礼物
-     * @param userId
-     * @param gift
-     * @return
-     */
-    RetResult<Object> takeGift(Long userId, Long gift);
 }

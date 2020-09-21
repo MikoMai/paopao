@@ -31,11 +31,21 @@ public class Gift extends BaseData {
     @Column
     private int num;
 
-    public Gift(String name, int integral, int num) {
+
+    /**
+     * 简介
+     */
+    @Column
+    private String content;
+
+
+    public Gift(String name, int integral, int num, String content) {
         this.name = name;
         this.integral = integral;
         this.num = num;
+        this.content = content;
     }
+
 
     public Gift() {
     }
@@ -62,5 +72,13 @@ public class Gift extends BaseData {
 
     public void setNum(int num) {
         this.num = num;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 }
