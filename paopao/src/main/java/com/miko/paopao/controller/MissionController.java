@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Controller
 @RequestMapping("/mission")
@@ -63,5 +64,17 @@ public class MissionController {
         Pageable pageable =  PageRequest.of(page-1,pageSize);
         Page<Mission> missionPage=missionService.getMissionPage(title,pageable);
         return RetResponse.makeOKRsp(missionPage);
+    }
+    @RequestMapping(value = "/getMissionPage2")
+    public RetResult<Page<Mission>> getMissionPage2(@RequestParam(value = "pageSize") Integer pageSize, @RequestParam(value = "page") Integer page){
+        Pageable pageable =  PageRequest.of(page-1,pageSize);
+        Page<Mission> missionPage=missionService.getNewMissionPage(pageable);
+        return RetResponse.makeOKRsp(missionPage);
+    }
+
+    @RequestMapping(value = "/getAllMissionByUser")
+    public RetResult<List<Mission>> getAllMissionByUser(@RequestParam(value = "userId") Integer userId){
+        List<Mission> missionList=missionService.findAllByUser(userId);
+        return RetResponse.makeOKRsp(missionList);
     }
 }

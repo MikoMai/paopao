@@ -4,6 +4,8 @@ import com.miko.paopao.entity.Mission;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 /**
  * @author miko
  */
@@ -61,4 +63,20 @@ public interface MissionService {
      */
     Page<Mission> getMissionPage(String title,Pageable pageable);
 
+
+    /**
+     * 分页
+     * @param pageable
+     * @return
+     */
+    public Page<Mission> getNewMissionPage(Pageable pageable);
+
+
+
+    /**
+     * 分页
+     * @param userId
+     * @return
+     */
+    public List<Mission> findAllByUser(long userId);
 }

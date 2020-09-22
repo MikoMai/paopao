@@ -15,6 +15,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 
 @Service
 @Transactional
@@ -63,6 +65,7 @@ public class MissionServiceImpl implements MissionService {
         User user=userService.getUserById(userId);
         Mission mission=this.getById(missionId);
         mission.setFinishByUser(user);
+        mission.setMissionStatus(2);
         this.saveMission(mission);
         Notice notice=new Notice();
         notice.setType(NoticeType.MISSION);
@@ -76,5 +79,16 @@ public class MissionServiceImpl implements MissionService {
     @Override
     public Page<Mission> getMissionPage(String title, Pageable pageable) {
         return missionRepository.findPageByTitle(title,pageable);
+    }
+
+    @Override
+    public Page<Mission> getNewMissionPage(Pageable pageable) {
+        return missionRepository.findNewMissionPage(pageable);
+    }
+
+    @Override
+    public List<Mission> findAllByUser(long userId) {
+        User user=userService.getUserById(userId);
+        return missionRepository.findAllByFinishByUser(user);
     }
 }

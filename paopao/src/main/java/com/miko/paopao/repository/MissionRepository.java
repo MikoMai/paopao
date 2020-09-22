@@ -1,6 +1,7 @@
 package com.miko.paopao.repository;
 
 import com.miko.paopao.entity.Mission;
+import com.miko.paopao.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -8,6 +9,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface MissionRepository extends JpaRepository<Mission, Long> {
@@ -40,4 +43,20 @@ public interface MissionRepository extends JpaRepository<Mission, Long> {
      */
     @Query(value = "SELECT m  FROM Mission m WHERE m.title like %:title%  AND m.status<>3")
     Page<Mission> findPageByTitle(@Param("title") String title, Pageable pageable);
+
+    /**
+     * 分页查任务
+     * @param pageable
+     * @return
+     */
+    @Query(value = "SELECT m  FROM Mission m WHERE m.missionStatus=1 AND m.status<>3")
+    Page<Mission> findNewMissionPage( Pageable pageable);
+
+
+    /**
+     * 分页查任务
+     * @param
+     * @return
+     */
+    List<Mission> findAllByFinishByUser(User user);
 }
