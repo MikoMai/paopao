@@ -59,4 +59,11 @@ public interface MissionRepository extends JpaRepository<Mission, Long> {
      * @return
      */
     List<Mission> findAllByFinishByUser(User user);
+
+    /**
+     * 分页查任务
+     * @param
+     * @return
+     */
+    List<Mission> findAllByCreateByUser(User user);
 }

@@ -74,9 +74,16 @@ public interface MissionService {
 
 
     /**
-     * 分页
+     * 根据完成者
      * @param userId
      * @return
      */
-    public List<Mission> findAllByUser(long userId);
+    public List<Mission> getAllMissionByFinishUser(long userId);
+
+    /**
+     * 根据创建者
+     * @param userId
+     * @return
+     */
+    public List<Mission> getAllMissionByCreateUser(long userId);
 }

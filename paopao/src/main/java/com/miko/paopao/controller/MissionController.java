@@ -72,9 +72,15 @@ public class MissionController {
         return RetResponse.makeOKRsp(missionPage);
     }
 
-    @RequestMapping(value = "/getAllMissionByUser")
-    public RetResult<List<Mission>> getAllMissionByUser(@RequestParam(value = "userId") Integer userId){
-        List<Mission> missionList=missionService.findAllByUser(userId);
+    @RequestMapping(value = "/getAllMissionByFinishUser")
+    public RetResult<List<Mission>> getAllMissionByFinishUser(@RequestParam(value = "userId") Integer userId){
+        List<Mission> missionList=missionService.getAllMissionByFinishUser(userId);
+        return RetResponse.makeOKRsp(missionList);
+    }
+
+    @RequestMapping(value = "/getAllMissionByCreateUser")
+    public RetResult<List<Mission>> getAllMissionByCreateUser(@RequestParam(value = "userId") Integer userId){
+        List<Mission> missionList=missionService.getAllMissionByCreateUser(userId);
         return RetResponse.makeOKRsp(missionList);
     }
 }

@@ -45,4 +45,12 @@ public interface UserService {
      * @return
      */
     RetResult<Object> login(String name, String password);
+
+
+    /**
+     * 修改密码
+     * @param password
+     * @param id
+     */
+    void updatePassword(String password, Long id);
 }

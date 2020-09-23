@@ -78,4 +78,10 @@ public class UserController {
         userService.updateStatusById(3,id);
         return RetResponse.makeOKRsp();
     }
+
+    @RequestMapping("/updatePassword")
+    public RetResult<Object> updatePassword(@RequestParam(value = "id") Long id,@RequestParam(value = "password") String  password){
+        userService.updatePassword(password,id);
+        return RetResponse.makeOKRsp();
+    }
 }

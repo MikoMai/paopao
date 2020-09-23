@@ -46,5 +46,8 @@ public class UserServiceImpl implements UserService {
         return RetResponse.makeOKRsp(user);
     }
 
-
+    @Override
+    public void updatePassword(String password, Long id) {
+        userRepository.updatePassword(password,id);
+    }
 }

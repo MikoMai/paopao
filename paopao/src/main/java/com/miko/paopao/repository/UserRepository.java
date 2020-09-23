@@ -55,4 +55,14 @@ public interface UserRepository extends JpaRepository<User, Long> {
      */
     User findByNameAndPassword(String name,String password);
 
+
+    /**
+     * 修改密码
+     * @param password
+     * @param id
+     */
+    @Modifying
+    @Query("update User u set u.password=?1 where  u.id = ?2")
+    void updatePassword(String password, long id);
+
 }

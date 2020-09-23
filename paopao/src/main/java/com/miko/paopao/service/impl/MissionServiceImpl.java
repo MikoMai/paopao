@@ -87,8 +87,14 @@ public class MissionServiceImpl implements MissionService {
     }
 
     @Override
-    public List<Mission> findAllByUser(long userId) {
+    public List<Mission> getAllMissionByFinishUser(long userId) {
         User user=userService.getUserById(userId);
         return missionRepository.findAllByFinishByUser(user);
+    }
+
+    @Override
+    public List<Mission> getAllMissionByCreateUser(long userId) {
+        User user=userService.getUserById(userId);
+        return missionRepository.findAllByCreateByUser(user);
     }
 }
