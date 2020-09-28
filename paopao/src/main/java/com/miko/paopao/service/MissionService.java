@@ -1,5 +1,6 @@
 package com.miko.paopao.service;
 
+import com.miko.paopao.base.response.RetResult;
 import com.miko.paopao.entity.Mission;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -86,4 +87,10 @@ public interface MissionService {
      * @return
      */
     public List<Mission> getAllMissionByCreateUser(long userId);
+
+    /**
+     *
+     * @param mission
+     */
+    public RetResult<Object> saveMissionByUser(Mission mission);
 }

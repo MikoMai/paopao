@@ -84,4 +84,16 @@ public class UserController {
         userService.updatePassword(password,id);
         return RetResponse.makeOKRsp();
     }
+
+    @RequestMapping("/register")
+    public RetResult<Object> register(@RequestParam(value = "name") String name,@RequestParam(value = "password") String  password
+            ,@RequestParam(value = "phone") String  phone,@RequestParam(value = "birthday") String  birthday,@RequestParam(value = "sex") Integer  sex){
+        User user=new User();
+        user.setName(name);
+        user.setPassword(password);
+        user.setPhone(phone);
+        user.setBirthday(birthday);
+        user.setSex(sex);
+        return userService.register(user);
+    }
 }

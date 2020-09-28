@@ -53,4 +53,11 @@ public interface UserService {
      * @param id
      */
     void updatePassword(String password, Long id);
+
+    /**
+     * 注册
+     * @param user
+     * @return
+     */
+    RetResult<Object> register(User user);
 }

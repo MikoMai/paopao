@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 @Service
 @Transactional
@@ -49,5 +50,18 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updatePassword(String password, Long id) {
         userRepository.updatePassword(password,id);
+    }
+
+    @Override
+    public RetResult<Object> register(User user) {
+        if(StringUtils.isEmpty(user.getPhone()) ){
+            return RetResponse.makeErrRsp("电话号码不能为空");
+        }
+        User checkUser = userRepository.findByPhone(user.getPhone());
+        if (checkUser != null) {
+            return RetResponse.makeErrRsp("电话号码已注册");
+        }
+        userRepository.save(user);
+        return RetResponse.makeOKRsp(user);
     }
 }

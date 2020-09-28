@@ -25,13 +25,13 @@ public class MissionController {
     private MissionService missionService;
 
     @RequestMapping("/saveMission")
-    public RetResult<Object> saveUser(@RequestBody Mission mission){
+    public RetResult<Object> saveMission(@RequestBody Mission mission){
         missionService.saveMission(mission);
         return RetResponse.makeOKRsp();
     }
 
     @RequestMapping(value = "/getMission")
-    public RetResult<Mission> getUser(@RequestParam(value = "missionId") Long missionId){
+    public RetResult<Mission> getMission(@RequestParam(value = "missionId") Long missionId){
         Mission mission=missionService.getById(missionId);
         return RetResponse.makeOKRsp(mission);
     }
@@ -82,5 +82,10 @@ public class MissionController {
     public RetResult<List<Mission>> getAllMissionByCreateUser(@RequestParam(value = "userId") Integer userId){
         List<Mission> missionList=missionService.getAllMissionByCreateUser(userId);
         return RetResponse.makeOKRsp(missionList);
+    }
+
+    @RequestMapping("/saveMissionByUser")
+    public RetResult<Object> saveMissionByUser(@RequestBody Mission mission){
+        return missionService.saveMissionByUser(mission);
     }
 }

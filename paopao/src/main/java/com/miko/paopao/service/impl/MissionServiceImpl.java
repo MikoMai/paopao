@@ -1,6 +1,8 @@
 package com.miko.paopao.service.impl;
 
 
+import com.miko.paopao.base.response.RetResponse;
+import com.miko.paopao.base.response.RetResult;
 import com.miko.paopao.entity.Mission;
 import com.miko.paopao.entity.Notice;
 import com.miko.paopao.entity.User;
@@ -97,4 +99,17 @@ public class MissionServiceImpl implements MissionService {
         User user=userService.getUserById(userId);
         return missionRepository.findAllByCreateByUser(user);
     }
+
+    @Override
+    public RetResult<Object> saveMissionByUser(Mission mission) {
+        User user=userService.getUserById(mission.getCreateByUser().getId());
+      if(user.getIntegral()<mission.getIntegral()){
+          return RetResponse.makeErrRsp("积分不足,无法创建任务,请先帮助他人获取更多积分吧");
+      }
+        this.saveMission(mission);
+        return RetResponse.makeOKRsp(mission);
+    }
+
+
+
 }
