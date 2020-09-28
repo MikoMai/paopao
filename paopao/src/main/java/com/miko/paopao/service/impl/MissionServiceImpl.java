@@ -106,6 +106,7 @@ public class MissionServiceImpl implements MissionService {
       if(user.getIntegral()<mission.getIntegral()){
           return RetResponse.makeErrRsp("积分不足,无法创建任务,请先帮助他人获取更多积分吧");
       }
+        mission.setPhone(user.getPhone());
         this.saveMission(mission);
         return RetResponse.makeOKRsp(mission);
     }
